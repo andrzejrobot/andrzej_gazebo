@@ -4,7 +4,10 @@
   </include>
   
   <!-- Convert an xacro and put on parameter server -->
-  <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(find andrzej_description)/urdf/andrzej.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find andrzej_description)/urdf/andrzej.xacro" />
+
+  <!-- Set PID gains for joints -->
+  <rosparam file="$(find andrzej_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>
 
   <!-- Spawn a robot into Gazebo -->
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model andrzej" />
